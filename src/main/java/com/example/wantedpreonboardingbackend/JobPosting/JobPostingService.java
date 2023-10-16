@@ -30,4 +30,24 @@ public class JobPostingService {
 
         return jobPostingRepository.save(jobPosting);
     }
+
+    public JobPosting updateJobPosting(Long jobPostingId, UpdateJobPostingDTO updateJobPostingDTO) {
+        JobPosting jobPosting = jobPostingRepository.findById(jobPostingId)
+                .orElseThrow(() -> new EntityNotFoundException("채용공고를 찾을 수 없습니다."));
+
+        if (updateJobPostingDTO.getPosition() != null) {
+            jobPosting.setPosition(updateJobPostingDTO.getPosition());
+        }
+        if (updateJobPostingDTO.getReward() > 0) {
+            jobPosting.setReward(updateJobPostingDTO.getReward());
+        }
+        if (updateJobPostingDTO.getDescription() != null) {
+            jobPosting.setDescription(updateJobPostingDTO.getDescription());
+        }
+        if (updateJobPostingDTO.getSkills() != null) {
+            jobPosting.setRequiredSkills(updateJobPostingDTO.getSkills());
+        }
+
+        return jobPostingRepository.save(jobPosting);
+    }
 }

@@ -3,13 +3,10 @@ package com.example.wantedpreonboardingbackend.JobPosting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/job-posting")
+@RequestMapping("/job-postings")
 public class JobPostingController {
     private final JobPostingService jobPostingService;
 
@@ -22,5 +19,12 @@ public class JobPostingController {
     public ResponseEntity<JobPosting> createJobPosting(@RequestBody JobPostingDTO jobPostingDTO) {
         JobPosting jobPosting = jobPostingService.createJobPosting(jobPostingDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(jobPosting);
+    }
+    @PutMapping("/{jobPostingId}")
+    public ResponseEntity<JobPosting> updateJobPosting(
+            @PathVariable Long jobPostingId,
+            @RequestBody UpdateJobPostingDTO updateJobPostingDTO) {
+        JobPosting updatedJobPosting = jobPostingService.updateJobPosting(jobPostingId, updateJobPostingDTO);
+        return ResponseEntity.ok(updatedJobPosting);
     }
 }
