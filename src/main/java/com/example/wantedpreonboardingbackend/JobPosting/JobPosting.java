@@ -1,10 +1,16 @@
-package com.example.wantedpreonboardingbackend.Domain;
+package com.example.wantedpreonboardingbackend.JobPosting;
 
+import com.example.wantedpreonboardingbackend.Company.Company;
+import com.example.wantedpreonboardingbackend.User.User;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class JobPosting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

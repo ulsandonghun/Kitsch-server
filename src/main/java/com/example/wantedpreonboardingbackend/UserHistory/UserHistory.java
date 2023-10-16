@@ -1,5 +1,7 @@
-package com.example.wantedpreonboardingbackend.Domain;
+package com.example.wantedpreonboardingbackend.UserHistory;
 
+import com.example.wantedpreonboardingbackend.JobPosting.JobPosting;
+import com.example.wantedpreonboardingbackend.User.User;
 import jakarta.persistence.*;
 
 @Entity

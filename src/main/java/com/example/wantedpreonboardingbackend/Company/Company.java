@@ -1,5 +1,6 @@
-package com.example.wantedpreonboardingbackend.Domain;
+package com.example.wantedpreonboardingbackend.Company;
 
+import com.example.wantedpreonboardingbackend.JobPosting.JobPosting;
 import jakarta.persistence.*;
 
 import java.util.List;
