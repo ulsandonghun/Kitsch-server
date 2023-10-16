@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Service
 public class JobPostingService {
     private final JobPostingRepository jobPostingRepository;
@@ -60,5 +62,9 @@ public class JobPostingService {
                 .orElseThrow(() -> new EntityNotFoundException("채용공고를 찾을 수 없습니다."));
 
         jobPostingRepository.delete(jobPosting);
+    }
+
+    public List<JobPosting> getAllJobPostings() {
+        return jobPostingRepository.findAll();
     }
 }
