@@ -68,8 +68,7 @@ public class JobPostingService {
         return jobPostingRepository.findAll();
     }
     public List<JobPosting> searchJobPostings(String search) {
-        return jobPostingRepository.findByCompanyContainingOrPositionContainingOrDescriptionContainingOrRequiredSkillsContaining(
-                search, search, search, search
-        );
+        return jobPostingRepository.findByCompanyContaining(search);
+
     }
 }

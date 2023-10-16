@@ -11,5 +11,7 @@ public interface JobPostingRepository extends JpaRepository<JobPosting,Long> {
     List<JobPosting> findByCompanyContainingOrPositionContainingOrDescriptionContainingOrRequiredSkillsContaining(
             String company, String position, String description, String requiredSkills
     );
+    List<JobPosting> findByCompanyContaining(String search);
+
 }
 
