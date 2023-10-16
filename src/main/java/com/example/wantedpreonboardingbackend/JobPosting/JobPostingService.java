@@ -4,7 +4,10 @@ import com.example.wantedpreonboardingbackend.Company.Company;
 import com.example.wantedpreonboardingbackend.Company.CompanyRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class JobPostingService {
@@ -49,5 +52,13 @@ public class JobPostingService {
         }
 
         return jobPostingRepository.save(jobPosting);
+    }
+
+
+    public void deleteJobPosting(Long jobPostingId) {
+        JobPosting jobPosting = jobPostingRepository.findById(jobPostingId)
+                .orElseThrow(() -> new EntityNotFoundException("채용공고를 찾을 수 없습니다."));
+
+        jobPostingRepository.delete(jobPosting);
     }
 }

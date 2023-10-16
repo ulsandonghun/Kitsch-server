@@ -29,5 +29,5 @@ public class JobPosting {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> applicants;
 
-    // Getter와 Setter 메서드
+
 }

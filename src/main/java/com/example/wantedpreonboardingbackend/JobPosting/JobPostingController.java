@@ -1,5 +1,6 @@
 package com.example.wantedpreonboardingbackend.JobPosting;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,10 @@ public class JobPostingController {
             @RequestBody UpdateJobPostingDTO updateJobPostingDTO) {
         JobPosting updatedJobPosting = jobPostingService.updateJobPosting(jobPostingId, updateJobPostingDTO);
         return ResponseEntity.ok(updatedJobPosting);
+    }
+    @DeleteMapping("/{jobPostingId}")
+    public ResponseEntity<Void> deleteJobPosting(@PathVariable Long jobPostingId) {
+        jobPostingService.deleteJobPosting(jobPostingId);
+        return ResponseEntity.noContent().build();
     }
 }
