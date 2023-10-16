@@ -1,12 +1,12 @@
 package com.example.wantedpreonboardingbackend.JobPosting;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/job-postings")
@@ -40,9 +40,10 @@ public class JobPostingController {
         List<JobPosting> jobPostings = jobPostingService.getAllJobPostings();
         return ResponseEntity.ok(jobPostings);
     }
-    @GetMapping("/search")
-    public ResponseEntity<List<JobPosting>> searchJobPostings(@RequestParam String search) {
-        List<JobPosting> jobPostings = jobPostingService.searchJobPostings(search);
+
+    @GetMapping("/search-by-company")
+    public ResponseEntity<List<JobPosting>> searchJobPostingsByCompany(@RequestParam("companyName") String companyName) {
+        List<JobPosting> jobPostings = jobPostingService.searchJobPostingsByCompany(companyName);
         return ResponseEntity.ok(jobPostings);
     }
 }

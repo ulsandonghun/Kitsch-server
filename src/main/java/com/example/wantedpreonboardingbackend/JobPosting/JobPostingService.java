@@ -4,12 +4,10 @@ import com.example.wantedpreonboardingbackend.Company.Company;
 import com.example.wantedpreonboardingbackend.Company.CompanyRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobPostingService {
@@ -67,8 +65,9 @@ public class JobPostingService {
     public List<JobPosting> getAllJobPostings() {
         return jobPostingRepository.findAll();
     }
-    public List<JobPosting> searchJobPostings(String search) {
-        return jobPostingRepository.findByCompanyContaining(search);
 
+
+    public List<JobPosting> searchJobPostingsByCompany(String companyName) {
+        return jobPostingRepository.findByCompanyCompanyNameContaining(companyName);
     }
 }
