@@ -40,4 +40,9 @@ public class JobPostingController {
         List<JobPosting> jobPostings = jobPostingService.getAllJobPostings();
         return ResponseEntity.ok(jobPostings);
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<JobPosting>> searchJobPostings(@RequestParam String search) {
+        List<JobPosting> jobPostings = jobPostingService.searchJobPostings(search);
+        return ResponseEntity.ok(jobPostings);
+    }
 }
