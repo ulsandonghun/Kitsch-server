@@ -6,8 +6,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class JobPostingService {
@@ -69,5 +68,16 @@ public class JobPostingService {
 
     public List<JobPosting> searchJobPostingsByCompany(String companyName) {
         return jobPostingRepository.findByCompanyCompanyNameContaining(companyName);
+    }
+
+    public List<JobPosting> searchJobPostings(String search) {
+        List<JobPosting> results = new ArrayList<>();
+        results.addAll(jobPostingRepository.findByCompanyCompanyNameContaining(search));
+        results.addAll(jobPostingRepository.findByPositionContaining(search));
+        results.addAll(jobPostingRepository.findByDescriptionContaining(search));
+        results.addAll(jobPostingRepository.findByRequiredSkillsContaining(search));
+        Set<JobPosting>  set= new HashSet<>(results);
+        List<JobPosting> list = new ArrayList<>(set);
+        return list;
     }
 }
