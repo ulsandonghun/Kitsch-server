@@ -51,4 +51,14 @@ public class JobPostingController {
 
         return ResponseEntity.ok(jobPostings);
     }
+    @GetMapping("/{jobId}")
+    public ResponseEntity<JobPostingDetailDTO> getJobPostingDetails(@PathVariable("jobId") Long jobId) {
+        JobPostingDetailDTO jobPostingDetailDTO = jobPostingService.getJobPostingDetails(jobId);
+
+        if (jobPostingDetailDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(jobPostingDetailDTO);
+    }
 }

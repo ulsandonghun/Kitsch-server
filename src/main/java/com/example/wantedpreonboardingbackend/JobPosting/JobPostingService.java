@@ -80,4 +80,30 @@ public class JobPostingService {
         List<JobPosting> list = new ArrayList<>(set);
         return list;
     }
+    public JobPostingDetailDTO getJobPostingDetails(Long jobId) {
+        // JobPostingRepository를 사용하여 채용공고 정보를 가져옴
+        JobPosting jobPosting = jobPostingRepository.findById(jobId).orElse(null);
+
+        if (jobPosting == null) {
+            // 해당 ID의 채용공고를 찾을 수 없음
+            return null;
+        }
+
+        // JobPostingDetailDTO로 매핑
+        JobPostingDetailDTO jobPostingDetailDTO = new JobPostingDetailDTO();
+        jobPostingDetailDTO.setJobId(jobPosting.getId());
+        jobPostingDetailDTO.setCompanyName(jobPosting.getCompany().getCompanyName());
+        jobPostingDetailDTO.setCountry(jobPosting.getCompany().getCountry());
+        jobPostingDetailDTO.setLocation(jobPosting.getCompany().getRegion());
+        jobPostingDetailDTO.setPosition(jobPosting.getPosition());
+        jobPostingDetailDTO.setReward(jobPosting.getReward());
+        jobPostingDetailDTO.setRequiredSkills(jobPosting.getRequiredSkills());
+        jobPostingDetailDTO.setDescription(jobPosting.getDescription());
+
+        // 해당 회사의 다른 채용공고 ID 가져오기
+        List<Long> otherJobPostings = jobPostingRepository.findOtherJobPostings(jobPosting.getCompany().getId(), jobPosting.getId());
+        jobPostingDetailDTO.setOtherJobPostings(otherJobPostings);
+
+        return jobPostingDetailDTO;
+    }
 }
